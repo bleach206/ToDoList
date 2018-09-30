@@ -4,13 +4,25 @@ using Microsoft.Extensions.Logging;
 
 namespace ToDoList
 {
+    /// <summary>
+    /// main class program for middle ware
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// main for console
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// middle ware
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureLogging((hostingContext, logging) =>

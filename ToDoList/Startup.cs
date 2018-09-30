@@ -15,16 +15,29 @@ using System.IO;
 
 namespace ToDoList
 {
+    /// <summary>
+    /// use to be gobal
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// configuration
+        /// </summary>
+        public IConfiguration Configuration { get; }
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>        
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureIOC(services);
@@ -39,12 +52,16 @@ namespace ToDoList
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "To Do API", Version = "v1" });
-                //var filePath = Path.Combine(System.AppContext.BaseDirectory, "ToDoList.xml");
-                //c.IncludeXmlComments(filePath);
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "ToDoList.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>       
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -86,6 +103,10 @@ namespace ToDoList
             });
         }
 
+        /// <summary>
+        /// setup IOC
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureIOC(IServiceCollection services)
         {
             services.AddScoped<IToDoService, ToDoService>();
